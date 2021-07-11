@@ -1,0 +1,61 @@
+{% extends "layout.html" %}
+{% block body %}
+<h2>Platforms</h2>
+<ul class=entries>
+    {% if platforms: %}
+    {% for platform, versions in platforms.items(): %}
+    <li>
+        <h3>{{ platform }}</h3>
+        <table>
+            {% for version, versionInfo in versions.items(): %}
+            <tr>
+                <td>
+                    <table>
+                        <tr class="version">
+                            <td rowspan="2"><h4>{{ version }}</h4></td>
+                            <td rowspan="2">&nbsp&nbsp</td>
+                            <td>Uploaded</td>
+                            <td>&nbsp&nbsp</td>
+                            <td>BIN Downloads</td>
+                            <td>&nbsp&nbsp</td>
+                            <td>SPIFFS Downloads</td>
+                        </tr>
+                        <tr>
+                            <td>
+                                {% if versionInfo['uploaded']: %}
+                                {{ versionInfo['uploaded'] }}
+                                {% else %}
+                                --
+                                {% endif %}
+                            </td>
+                            <td>&nbsp&nbsp</td>
+                            <td>
+                                {% if versionInfo['bin_downloads']: %}
+                                {{ versionInfo['bin_downloads'] }}
+                                {% else %}
+                                0
+                                {% endif %}
+                            </td>
+                            <td>&nbsp&nbsp</td>
+                            <td>
+                                {% if versionInfo['spiffs_downloads']: %}
+                                {{ versionInfo['spiffs_downloads'] }}
+                                {% else %}
+                                0
+                                {% endif %}
+                            </td>
+                        </tr>
+                    </table>
+                </td>
+            </tr>
+            {% endfor %}
+        </table>
+        {% endfor %}
+    </li>
+    {% else %}
+    <li>
+        <em>No platforms created.</em>
+    </li>
+    {% endif %}
+</ul>
+{% endblock %}
